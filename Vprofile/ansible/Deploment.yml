@@ -1,0 +1,15 @@
+---
+- hosts: tomcatservers
+  become: yes
+  gather_facts: False
+  tasks:
+
+  - name: Copy artifact
+    copy:
+       src: target/vrofile-v1.war
+       dest: /opt/apache-tomcat-8.5.55/webapps/
+  - name: Stop Tomcat
+    command: "./opt/apache-tomcat-8.5.55/bin/shutdown.sh"
+  - name: Start Tomcat
+    command: "./opt/apache-tomcat-8.5.55/bin/startup.sh"
+
